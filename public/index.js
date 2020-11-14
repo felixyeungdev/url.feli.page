@@ -19,6 +19,10 @@ function createHistoryItem(item) {
     long.classList.add("long-link");
     long.innerText = item["url"];
 
+    const title = document.createElement("p");
+    title.classList.add("link-title");
+    title.innerText = item["title"];
+
     const short = document.createElement("input");
     short.classList.add("short-link");
     short.type = "text";
@@ -27,8 +31,9 @@ function createHistoryItem(item) {
         ""
     )}`;
     short.value = item["shortUrl"];
-
-    itemElement.append(time, long, short);
+    itemElement.append(time);
+    if (item["title"]) itemElement.append(title);
+    itemElement.append(long, short);
     return itemElement;
 }
 
