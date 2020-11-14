@@ -22,7 +22,10 @@ function createHistoryItem(item) {
     const short = document.createElement("input");
     short.classList.add("short-link");
     short.type = "text";
-    short.id = `short-link_${item["shortUrl"]}`;
+    short.id = `short-link_${item["shortUrl"].replace(
+        "https://url.feli.page/link/",
+        ""
+    )}`;
     short.value = item["shortUrl"];
 
     itemElement.append(time, long, short);
