@@ -121,7 +121,7 @@ body main#history .list .history-item {
   margin-top: 16px;
 }
 
-body main#history .list .history-item .long-link {
+body main#history .list .history-item p {
   max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
