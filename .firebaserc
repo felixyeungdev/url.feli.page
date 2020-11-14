@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "feli-page"
+  },
+  "targets": {
+    "feli-page": {
+      "hosting": {
+        "feli-url-shortener": [
+          "feli-url-shortener"
+        ]
+      }
+    }
+  }
+}

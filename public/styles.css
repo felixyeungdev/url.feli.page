@@ -1,0 +1,155 @@
+* {
+  font-family: "Roboto", sans-serif;
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  background-color: white;
+  max-width: 600px;
+  height: 100%;
+}
+
+body .section-line {
+  height: 1px;
+  background-color: #f9a825;
+  width: 100%;
+}
+
+body header,
+body main,
+body footer {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+body header {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+body header img {
+  height: 48px;
+  margin: 8px;
+}
+
+body header h1 {
+  margin-top: 8px;
+  font-size: 26px;
+}
+
+body main {
+  padding: 8px;
+}
+
+body main label {
+  font-size: 13px;
+}
+
+body main input {
+  font-size: 16px;
+  background-color: #feedd3;
+  height: 48px;
+  padding: 8px;
+  margin: 4px;
+  width: calc(100% - 8px);
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  -webkit-transition: background-color 250ms ease-in-out;
+  transition: background-color 250ms ease-in-out;
+  border-bottom: #f9a825 solid 1.5px;
+}
+
+body main input:hover {
+  background-color: #fef7ec;
+}
+
+body main input:active,
+body main input:focus {
+  background-color: #fcdaa1;
+}
+
+body main .buttons {
+  margin-top: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body main .buttons button {
+  margin-left: 8px;
+  margin-right: 8px;
+  height: 32px;
+  min-width: 48px;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  outline: none;
+  border: none;
+  background-color: #fcdaa1;
+  border-radius: 8px;
+  padding: 8px;
+  -webkit-transition: background-color 250ms ease-in-out;
+  transition: background-color 250ms ease-in-out;
+  cursor: pointer;
+}
+
+body main .buttons button:hover {
+  background-color: #fde3ba;
+}
+
+body main .buttons button:active,
+body main .buttons button:focus {
+  background-color: #fbc66f;
+}
+
+body main .buttons button[disabled] {
+  cursor: default;
+  background-color: white;
+}
+
+body main#history {
+  padding: 8px;
+}
+
+body main#history .list .history-item {
+  margin-top: 16px;
+}
+
+body main#history .list .history-item .long-link {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body footer {
+  margin: 16px;
+}
+
+body footer h5 {
+  font-size: 12px;
+}
+
+body footer a {
+  color: #f9a825;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+  img {
+    -webkit-filter: hue-rotate(180deg) invert(1);
+            filter: hue-rotate(180deg) invert(1);
+  }
+  body {
+    background-color: #000000;
+    color: white;
+  }
+}
+/*# sourceMappingURL=styles.css.map */

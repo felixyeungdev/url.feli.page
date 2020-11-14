@@ -1,0 +1,136 @@
+* {
+    font-family: "Roboto", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    background-color: white;
+    max-width: 600px;
+    height: 100%;
+    .section-line {
+        height: 1px;
+        background-color: #f9a825;
+        width: 100%;
+    }
+    header,
+    main,
+    footer {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    header {
+        display: grid;
+        place-items: center;
+        img {
+            height: 48px;
+            margin: 8px;
+        }
+        h1 {
+            margin-top: 8px;
+            font-size: 26px;
+        }
+    }
+
+    main {
+        padding: 8px;
+        .loading-animation {
+        }
+        label {
+            font-size: 13px;
+        }
+        input {
+            font-size: 16px;
+            background-color: lighten(#f9a825, 35%);
+            height: 48px;
+            padding: 8px;
+            margin: 4px;
+            width: calc(100% - 8px);
+            border-radius: 4px;
+            border: none;
+            outline: none;
+            transition: background-color 250ms ease-in-out;
+            border-bottom: #f9a825 solid 1.5px;
+        }
+        input:hover {
+            background-color: lighten(#f9a825, 40%);
+        }
+        input:active,
+        input:focus {
+            background-color: lighten(#f9a825, 25%);
+        }
+        .buttons {
+            margin-top: 8px;
+            display: flex;
+            button {
+                margin-left: 8px;
+                margin-right: 8px;
+                height: 32px;
+                min-width: 48px;
+                display: grid;
+                place-items: center;
+                outline: none;
+                border: none;
+                background-color: lighten(#f9a825, 25%);
+                border-radius: 8px;
+                padding: 8px;
+                transition: background-color 250ms ease-in-out;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: lighten(#f9a825, 30%);
+            }
+            button:active,
+            button:focus {
+                background-color: lighten(#f9a825, 15%);
+            }
+            button[disabled] {
+                cursor: default;
+                background-color: white;
+            }
+        }
+    }
+
+    main#history {
+        padding: 8px;
+        h3 {
+        }
+        .list {
+            .history-item {
+                margin-top: 16px;
+                .long-link {
+                    max-width: 100%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .short-link {
+                }
+            }
+        }
+    }
+
+    footer {
+        margin: 16px;
+        h5 {
+            font-size: 12px;
+        }
+        a {
+            color: #f9a825;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    img {
+        filter: hue-rotate(180deg) invert(1);
+    }
+    body {
+        background-color: #000000;
+        color: white;
+    }
+}

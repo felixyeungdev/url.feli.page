@@ -1,0 +1,15 @@
+{
+    "hosting": {
+        "appAssociation": "AUTO",
+        "public": "public",
+        "target": "feli-url-shortener",
+        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+        "rewrites": [
+            { "source": "/api/urlShortener", "function": "urlShortener" },
+            {
+                "source": "/link/**",
+                "dynamicLinks": true
+            }
+        ]
+    }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Feli URL Shortener</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto"
+            rel="stylesheet"
+        />
+        <script src="scripts/clipboard.min.js"></script>
+        <script src="scripts/dateFormat.min.js"></script>
+
+        <link rel="stylesheet" href="styles.css" />
+        <script src="index.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <div class="app-icon">
+                <a href="https://url.feli.page/" target="_blank">
+                    <img src="images/logo.png" alt="App Logo" />
+                </a>
+            </div>
+            <div class="app-title"><h1>Feli URL Shortener</h1></div>
+        </header>
+        <div class="section-line"></div>
+        <main>
+            <div class="loading-animation"></div>
+            <label for="input-url">Original</label>
+            <input type="text" id="input-url" />
+            <label for="output-url">Shortened</label>
+            <input type="text" id="output-url" />
+            <div class="buttons">
+                <button id="convert">Convert</button>
+                <button id="copy" data-clipboard-target="#output-url" disabled>
+                    Copy
+                </button>
+            </div>
+        </main>
+        <div class="section-line"></div>
+        <main id="history" hidden>
+            <h3>History</h3>
+            <div class="list"></div>
+        </main>
+        <div class="section-line" hidden></div>
+        <footer>
+            <h5>
+                Developed by
+                <a href="https://felixyeung.dev" target="_blank">Felix</a>
+            </h5>
+            <h5>
+                Source code on
+                <a
+                    href="https://github.com/felixyeungdev/url.feli.page"
+                    target="_blank"
+                    >GitHub</a
+                >
+            </h5>
+        </footer>
+    </body>
+</html>
