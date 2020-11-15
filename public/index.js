@@ -5,6 +5,7 @@ let copyButton = document.querySelector("button#copy");
 let historySection = document.querySelector("#history");
 let historySectionList = historySection.querySelector(".list");
 
+let oldCombinedHistoryJson = "";
 var converting = false;
 
 function createHistoryItem(item) {
@@ -47,13 +48,16 @@ function renderHistory() {
         historySection.hidden = false;
         historySection.nextElementSibling.hidden = false;
     }
-    historySectionList.innerHTML = "";
     combinedHistory.sort((a, b) => {
         const key = "time";
         if (a[key] < b[key]) return 1;
         if (a[key] > b[key]) return -1;
         return 0;
     });
+    let newCombinedHistoryJson = JSON.stringify(combinedHistory);
+    if (newCombinedHistoryJson == oldCombinedHistoryJson) return;
+    oldCombinedHistoryJson = newCombinedHistoryJson;
+    historySectionList.innerHTML = "";
     for (var item of combinedHistory) {
         historySectionList.append(createHistoryItem(item));
     }
@@ -112,4 +116,6 @@ async function convertURL(link, title) {
 }
 
 convertButton.addEventListener("click", convert);
+
 renderHistory();
+setInterval(renderHistory, 1000);
