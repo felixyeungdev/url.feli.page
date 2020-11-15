@@ -34,6 +34,9 @@ function createHistoryItem(item) {
         ""
     )}`;
 
+    const buttons = document.createElement("div");
+    buttons.classList.add("buttons");
+
     const copyButton = document.createElement("button");
     copyButton.setAttribute("data-clipboard-target", `#${short.id}`);
     copyButton.innerText = "Copy";
@@ -42,10 +45,19 @@ function createHistoryItem(item) {
     );
     var clipboard = new ClipboardJS(copyButton);
 
+    const removeButton = document.createElement("button");
+    removeButton.innerText = "Remove";
+    removeButton.addEventListener("click", () => {
+        removeFromHistory(item["shortUrl"], item["from"] == "extension");
+        changeInnerTextTemporary(removeButton, "Removing", 25000);
+    });
+
+    buttons.append(copyButton, removeButton);
+
     short.value = item["shortUrl"];
     itemElement.append(time);
     if (item["title"]) itemElement.append(title);
-    itemElement.append(long, short, copyButton);
+    itemElement.append(long, short, buttons);
     return itemElement;
 }
 
@@ -54,10 +66,23 @@ function renderHistory() {
     var extensionHistory = JSON.parse(
         window.localStorage.extensionHistory || "[]"
     );
+
+    webAppHistory = webAppHistory.map((history) => {
+        history["from"] = "webApp";
+        return history;
+    });
+
+    extensionHistory = extensionHistory.map((history) => {
+        history["from"] = "extension";
+        return history;
+    });
+
     var combinedHistory = [...webAppHistory, ...extensionHistory];
     if (combinedHistory.length > 0) {
         historySection.hidden = false;
         historySection.nextElementSibling.hidden = false;
+    } else {
+        historySection.hidden = true;
     }
     combinedHistory.sort((a, b) => {
         const key = "time";
@@ -65,6 +90,7 @@ function renderHistory() {
         if (a[key] > b[key]) return -1;
         return 0;
     });
+
     let newCombinedHistoryJson = JSON.stringify(combinedHistory);
     if (newCombinedHistoryJson == oldCombinedHistoryJson) return;
     oldCombinedHistoryJson = newCombinedHistoryJson;
@@ -83,6 +109,22 @@ async function saveToHistory(url, shortUrl, title) {
         time: Date.now(),
     });
     window.localStorage.history = JSON.stringify(webAppHistory);
+}
+
+async function removeFromHistory(shortUrl, extension = false) {
+    if (!extension) {
+        var webAppHistory = JSON.parse(window.localStorage.history || "[]");
+        webAppHistory = webAppHistory.filter((e) => e["shortUrl"] != shortUrl);
+        window.localStorage.history = JSON.stringify(webAppHistory);
+    } else {
+        var removalList = JSON.parse(
+            window.localStorage.extensionHistoryRemoval || "[]"
+        );
+        removalList.push(shortUrl);
+        window.localStorage.extensionHistoryRemoval = JSON.stringify(
+            removalList
+        );
+    }
 }
 
 async function convert() {
@@ -139,4 +181,4 @@ async function changeInnerTextTemporary(element, text, duration) {
 convertButton.addEventListener("click", convert);
 
 renderHistory();
-setInterval(renderHistory, 2500);
+setInterval(renderHistory, 100);
