@@ -8,6 +8,8 @@ let historySectionList = historySection.querySelector(".list");
 let oldCombinedHistoryJson = "";
 var converting = false;
 
+let sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 function createHistoryItem(item) {
     const itemElement = document.createElement("div");
     itemElement.classList.add("history-item");
@@ -35,6 +37,9 @@ function createHistoryItem(item) {
     const copyButton = document.createElement("button");
     copyButton.setAttribute("data-clipboard-target", `#${short.id}`);
     copyButton.innerText = "Copy";
+    copyButton.addEventListener("click", () =>
+        changeInnerTextTemporary(copyButton, "Copied", 1000)
+    );
     var clipboard = new ClipboardJS(copyButton);
 
     short.value = item["shortUrl"];
@@ -94,6 +99,9 @@ async function convert() {
 }
 
 var clipboard = new ClipboardJS(copyButton);
+copyButton.addEventListener("click", () =>
+    changeInnerTextTemporary(copyButton, "Copied", 2500)
+);
 
 async function convertURL(link, title) {
     try {
@@ -121,7 +129,14 @@ async function convertURL(link, title) {
     return "Error";
 }
 
+async function changeInnerTextTemporary(element, text, duration) {
+    var originalText = element.innerText;
+    element.innerText = text;
+    await sleep(duration);
+    if (element.innerText == text) element.innerText = originalText;
+}
+
 convertButton.addEventListener("click", convert);
 
 renderHistory();
-setInterval(renderHistory, 1000);
+setInterval(renderHistory, 2500);
