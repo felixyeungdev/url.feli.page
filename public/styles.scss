@@ -15,6 +15,34 @@ body {
         background-color: #f9a825;
         width: 100%;
     }
+
+    button {
+        margin-left: 8px;
+        margin-right: 8px;
+        height: 32px;
+        min-width: 48px;
+        display: grid;
+        place-items: center;
+        outline: none;
+        border: none;
+        background-color: lighten(#f9a825, 25%);
+        border-radius: 8px;
+        padding: 8px;
+        transition: background-color 250ms ease-in-out;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: lighten(#f9a825, 30%);
+    }
+    button:active,
+    button:focus {
+        background-color: lighten(#f9a825, 15%);
+    }
+    button[disabled] {
+        cursor: default;
+        background-color: white;
+    }
+
     header,
     main,
     footer {
@@ -64,32 +92,6 @@ body {
         .buttons {
             margin-top: 8px;
             display: flex;
-            button {
-                margin-left: 8px;
-                margin-right: 8px;
-                height: 32px;
-                min-width: 48px;
-                display: grid;
-                place-items: center;
-                outline: none;
-                border: none;
-                background-color: lighten(#f9a825, 25%);
-                border-radius: 8px;
-                padding: 8px;
-                transition: background-color 250ms ease-in-out;
-                cursor: pointer;
-            }
-            button:hover {
-                background-color: lighten(#f9a825, 30%);
-            }
-            button:active,
-            button:focus {
-                background-color: lighten(#f9a825, 15%);
-            }
-            button[disabled] {
-                cursor: default;
-                background-color: white;
-            }
         }
     }
 

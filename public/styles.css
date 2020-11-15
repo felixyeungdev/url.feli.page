@@ -19,6 +19,38 @@ body .section-line {
   width: 100%;
 }
 
+body button {
+  margin-left: 8px;
+  margin-right: 8px;
+  height: 32px;
+  min-width: 48px;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  outline: none;
+  border: none;
+  background-color: #fcdaa1;
+  border-radius: 8px;
+  padding: 8px;
+  -webkit-transition: background-color 250ms ease-in-out;
+  transition: background-color 250ms ease-in-out;
+  cursor: pointer;
+}
+
+body button:hover {
+  background-color: #fde3ba;
+}
+
+body button:active,
+body button:focus {
+  background-color: #fbc66f;
+}
+
+body button[disabled] {
+  cursor: default;
+  background-color: white;
+}
+
 body header,
 body main,
 body footer {
@@ -79,38 +111,6 @@ body main .buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-}
-
-body main .buttons button {
-  margin-left: 8px;
-  margin-right: 8px;
-  height: 32px;
-  min-width: 48px;
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
-  outline: none;
-  border: none;
-  background-color: #fcdaa1;
-  border-radius: 8px;
-  padding: 8px;
-  -webkit-transition: background-color 250ms ease-in-out;
-  transition: background-color 250ms ease-in-out;
-  cursor: pointer;
-}
-
-body main .buttons button:hover {
-  background-color: #fde3ba;
-}
-
-body main .buttons button:active,
-body main .buttons button:focus {
-  background-color: #fbc66f;
-}
-
-body main .buttons button[disabled] {
-  cursor: default;
-  background-color: white;
 }
 
 body main#history {
