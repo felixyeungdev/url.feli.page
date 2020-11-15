@@ -38,7 +38,7 @@ function createHistoryItem(item) {
     copyButton.setAttribute("data-clipboard-target", `#${short.id}`);
     copyButton.innerText = "Copy";
     copyButton.addEventListener("click", () =>
-        changeInnerTextTemporary(copyButton, "Copied", 1000)
+        changeInnerTextTemporary(copyButton, "Copied", 2500)
     );
     var clipboard = new ClipboardJS(copyButton);
 
