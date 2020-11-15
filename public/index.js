@@ -31,10 +31,16 @@ function createHistoryItem(item) {
         "https://url.feli.page/link/",
         ""
     )}`;
+
+    const copyButton = document.createElement("button");
+    copyButton.setAttribute("data-clipboard-target", `#${short.id}`);
+    copyButton.innerText = "Copy";
+    var clipboard = new ClipboardJS(copyButton);
+
     short.value = item["shortUrl"];
     itemElement.append(time);
     if (item["title"]) itemElement.append(title);
-    itemElement.append(long, short);
+    itemElement.append(long, short, copyButton);
     return itemElement;
 }
 
