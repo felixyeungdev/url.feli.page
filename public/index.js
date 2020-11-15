@@ -83,6 +83,7 @@ function renderHistory() {
         historySection.nextElementSibling.hidden = false;
     } else {
         historySection.hidden = true;
+        historySection.nextElementSibling.hidden = true;
     }
     combinedHistory.sort((a, b) => {
         const key = "time";
