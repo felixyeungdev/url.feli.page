@@ -1,3 +1,4 @@
+const extensionId = "lbnngkempafdnmemljnanlfkmblnfnhb";
 let inputField = document.querySelector("input#input-url");
 let outputField = document.querySelector("input#output-url");
 let convertButton = document.querySelector("button#convert");
@@ -47,9 +48,10 @@ function createHistoryItem(item) {
 
     const removeButton = document.createElement("button");
     removeButton.innerText = "Remove";
-    removeButton.addEventListener("click", () => {
-        removeFromHistory(item["shortUrl"], item["from"] == "extension");
+    removeButton.addEventListener("click", async () => {
         changeInnerTextTemporary(removeButton, "Removing", 25000);
+        await removeFromHistory(item["shortUrl"], item["from"] == "extension");
+        renderHistory();
     });
 
     buttons.append(copyButton, removeButton);
@@ -61,11 +63,9 @@ function createHistoryItem(item) {
     return itemElement;
 }
 
-function renderHistory() {
+async function renderHistory() {
     var webAppHistory = JSON.parse(window.localStorage.history || "[]");
-    var extensionHistory = JSON.parse(
-        window.localStorage.extensionHistory || "[]"
-    );
+    var extensionHistory = await getExtensionHistory();
 
     webAppHistory = webAppHistory.map((history) => {
         history["from"] = "webApp";
@@ -118,14 +118,42 @@ async function removeFromHistory(shortUrl, extension = false) {
         webAppHistory = webAppHistory.filter((e) => e["shortUrl"] != shortUrl);
         window.localStorage.history = JSON.stringify(webAppHistory);
     } else {
-        var removalList = JSON.parse(
-            window.localStorage.extensionHistoryRemoval || "[]"
-        );
-        removalList.push(shortUrl);
-        window.localStorage.extensionHistoryRemoval = JSON.stringify(
-            removalList
-        );
+        await removeExtensionHistory(shortUrl);
     }
+}
+
+async function getExtensionHistory() {
+    if (!window.chrome) return [];
+    return new Promise((resolve, reject) => {
+        try {
+            chrome.runtime.sendMessage(
+                extensionId,
+                { getHistory: true },
+                (response) => {
+                    resolve(response || []);
+                }
+            );
+        } catch (error) {
+            resolve([]);
+        }
+    });
+}
+
+async function removeExtensionHistory(shortUrl) {
+    if (!window.chrome) return [];
+    return new Promise((resolve, reject) => {
+        try {
+            chrome.runtime.sendMessage(
+                extensionId,
+                { deleteHistory: shortUrl },
+                (response) => {
+                    resolve(response);
+                }
+            );
+        } catch (error) {
+            reject(error);
+        }
+    });
 }
 
 async function convert() {
@@ -162,7 +190,6 @@ async function convertURL(link, title) {
             }
         );
         let json = await response.json();
-        console.log(json);
         if (json["data"] && json["data"]["shortLink"]) {
             await saveToHistory(link, json["data"]["shortLink"], "");
             await renderHistory();
@@ -182,4 +209,15 @@ async function changeInnerTextTemporary(element, text, duration) {
 convertButton.addEventListener("click", convert);
 
 renderHistory();
-setInterval(renderHistory, 100);
+
+window.addEventListener(
+    "message",
+    function (event) {
+        if (
+            event.data.type == "url.feli.page-chrome-extension" &&
+            event.data.text == "new_history_item"
+        )
+            renderHistory();
+    },
+    false
+);
