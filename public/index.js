@@ -103,6 +103,9 @@ async function renderHistory() {
 
 async function saveToHistory(url, shortUrl, title) {
     var webAppHistory = JSON.parse(window.localStorage.history || "[]");
+    webAppHistory = webAppHistory.filter(
+        (history) => history.shortUrl != shortUrl
+    );
     webAppHistory.unshift({
         url,
         shortUrl,
