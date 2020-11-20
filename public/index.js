@@ -183,7 +183,7 @@ async function convertURL(link, title) {
                 headers: {
                     "domain-uri-prefix": "https://url.feli.page/link",
                     "request-link": link,
-                    "request-type": "UNGUESSABLE",
+                    "request-type": "SHORT",
                     "social-title": title,
                     "social-description": link,
                 },
